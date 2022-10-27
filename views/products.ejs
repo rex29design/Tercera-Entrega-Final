@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+    <section class="row p-3 m-2 bg-success">
+        <h1 class="col-10 text-white">WELCOME!</h1>
+        <div class="col-2">
+            <button class=" m-2 btn btn-warning"><a class="text-secondary" href="index.html">Logout</a></button>
+        </div>
+    </section>
+    <div class="container col-12 mt-3">
+        <div class="card">
+            <div class="card-header">
+                <h3>Available Products</h3>
+            </div>
+            <div class="card-body m-0">
+                <table class="table table-striped">
+                    <tr>
+                        <th>ID</th>
+                        <th>Timestamp</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th>Add to Cart</th>
+                    </tr>
+                    <% data.forEach(element=> { %>
+                        <tr>
+                            <td>
+                                <%= element.id %>
+                            </td>
+                            <td>
+                                <%= Date.now()%>
+                            </td>
+                            <td>
+                                <%= element.name %>
+                            </td>
+                            <td>
+                                <%= element.price %>
+                            </td>
+                            <td>
+                                <%= element.description %>
+                            </td>
+                            <td><img src="<%= element.image %>"></td>
+                            <td><a href="/update/<%= element.id %>">🖊️</a></td>
+                            <td>
+                                <form action="delete-products" method="post">
+                                    <input type="hidden" name="id" value="<%= element.id%>">
+                                    <button class="btn btn-secondary" type="submit">Delete</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/cart" method="post">
+                                    <input type="hidden" name="id" value="<%= element.id%>">
+                                    <button class="btn btn-secondary" type="submit">Add to Cart</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        <% }); %>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a href="user-login.html">To Form</a>
+                <a class="pl-3" href="/cart">To Cart</a>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
